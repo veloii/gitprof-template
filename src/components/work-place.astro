@@ -7,9 +7,10 @@ interface Props {
     description: string;
     index?: number;
     total?: number;
+    active?: boolean;
 }
 
-const {role, index=0, total=1, company, location, timePeriod, description} = Astro.props;
+const {role, index=0, active, total=1, company, location, timePeriod, description} = Astro.props;
 
 const hasMultiple = total > 1;
 const isLast = hasMultiple && (index === total - 1);
@@ -18,11 +19,12 @@ const isMiddle = hasMultiple && !isFirst && !isLast;
 ---
 
 <div class="flex gap-6 md:gap-12 relative">
-    <div class:list={["flex-grow min-w-[3px] max-w-[3px] flex justify-center items-start", !isLast && "dark:bg-neutral-800 bg-neutral-100"]}>
-        <div class:list={["h-6 w-6 dark:bg-neutral-800 bg-neutral-200 absolute rounded-full grid place-content-center", 
-            isMiddle && "top-[5rem]"
+    <div class:list={["flex-grow min-w-[3px] max-w-[3px] flex justify-center items-start", !isLast && (active ? "from-primary-300 to-neutral-100 dark:from-primary-900 dark:to-neutral-800 bg-gradient-to-b" : "dark:bg-neutral-800 bg-neutral-100")]}>
+        <div class:list={["h-6 w-6 absolute rounded-full grid place-content-center", 
+            isMiddle && "top-[5rem]",
+            active ? "bg-primary-300 dark:bg-primary-900" : "dark:bg-neutral-800 bg-neutral-200"
         ]}>
-            <div class="h-3 w-3 dark:bg-neutral-700 bg-neutral-300 rounded-full" />
+            <div class:list={["h-3 w-3 rounded-full", active ? "bg-primary-400 dark:bg-primary-500" : "dark:bg-neutral-700 bg-neutral-300"]} />
         </div>
     </div>
     <div class:list={[
