@@ -23,7 +23,7 @@ const items = [
 type Item = typeof items[number];
 
 const isActive = (item: Item) => {
-    return item.href === location.replace(/\/$/, '');
+    return item.href.replace(/\/$/, '') === location.replace(/\/$/, '');
 };
 
 const getClasses = (item: Item) => {
