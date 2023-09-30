@@ -1,9 +1,11 @@
 ---
 interface Props {
-    location: string;
+    key?: string;
 }
 
-let {location} = Astro.props;
+const {key = "nav-key"} = Astro.props;
+
+const location = Astro.url.pathname;
 
 const items = [
     {
@@ -33,9 +35,9 @@ const getClasses = (item: Item) => {
 };
 ---
 
-<div class="flex justify-center">
-    <div class="bg-neutral-200 relative dark:bg-neutral-800 p-[1px] rounded-full">
-        <div class="flex-row text-base font-medium dark:text-white/50 text-black/50 items-center px-8 flex gap-7 h-11 rounded-full bg-white/80 dark:bg-neutral-950/80">
+<div id="header-root" class="left-0 w-full z-50 fixed rounded-full transition-all duration-500 ease-in-out">
+    <div id="header-wrapper" class="p-[1px] max-w-6xl mx-auto transition-all duration-500 ease-in-out overflow-hidden">
+        <div id="header" class="flex-row text-base justify-center font-medium dark:text-white/50 text-black/50 items-center px-8 flex gap-7 border-b border-b-neutral-800 h-11 duration-500 transition-all ease-in-out">
             {items.map(item => (
                 <div class="relative h-full flex flex-col justify-center">
                     <a
@@ -44,13 +46,12 @@ const getClasses = (item: Item) => {
                         aria-label={`Navigate to ${item.name}`}
                         class={`cursor-pointer z-20 relative ${getClasses(item)}`}
                         transition:animate="initial"
-                        transition:name={item.href}
+                        transition:name={`${key}-${item.href}`}
                     >{item.name}</a>
                     {isActive(item) &&
-                        <div transition:name="a"
+                        <div transition:name={key}
                         transition:animate="initial"
-
-                         class="h-[45px] left-[-50px] bottom-[-1px] w-[calc(100%+100px)] absolute pointer-events-none z-10 overflow-hidden">
+                            class="h-[45px] left-[-50px] bottom-[-1px] w-[calc(100%+100px)] absolute pointer-events-none z-10 overflow-hidden">
                             <div class="bg-gradient-to-l dark:from-primary-600 dark:to-accent-600 from-primary-400 to-accent-400 blur-lg -bottom-5 absolute w-6 left-1/2 -translate-x-1/2 h-7"></div>
                         </div>
                     }
@@ -59,3 +60,37 @@ const getClasses = (item: Item) => {
         </div>
     </div>
 </div>
+
+<style>
+    .header-sticky {
+        @apply bg-white/80 rounded-[50px] h-12 border-b-0 dark:bg-black/70 !important;
+    }
+
+    .header-wrapper-sticky {
+        @apply bg-neutral-200/50 rounded-[50px] backdrop-blur z-50 relative dark:bg-neutral-700/40 !important;
+    }
+
+    .header-root-sticky {
+        @apply w-[calc(100%-200px)] pt-5 left-[100px] rounded-full !important;
+    }
+</style>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const element = document.getElementById("header")!;
+        const elementWrapper = document.getElementById("header-wrapper")!;
+        const elementRoot = document.getElementById("header-root")!;
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 0) {
+                element.classList.add("header-sticky");
+                elementWrapper.classList.add("header-wrapper-sticky");
+                elementRoot.classList.add("header-root-sticky");
+            } else {
+                elementWrapper.classList.remove("header-wrapper-sticky");
+                element.classList.remove("header-sticky");
+                elementRoot.classList.remove("header-root-sticky");
+            }
+        });
+    });
+</script>
