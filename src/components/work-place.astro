@@ -30,7 +30,7 @@ const isMiddle = hasMultiple && !isFirst && !isLast;
     <div class:list={[
         isMiddle && "py-20",
     ]}>
-        <h5 class="font-mono font-normal text-base md:text-lg mt-[.1rem] uppercase md:-mt-[.1rem] mb-3 opacity-80">{timePeriod} • {location}</h5>
+        <h5 class="font-mono font-normal text-sm sm:text-base md:text-lg mt-[.1rem] uppercase md:-mt-[.1rem] mb-3 opacity-80">{timePeriod} <span class="opacity-50 mx-3">•</span> {location}</h5>
         <div class="md:block hidden">
             <h3 class="font-normal"><span class="font-bold">{company} / </span> {role}</h3>
         </div>
