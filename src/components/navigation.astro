@@ -23,7 +23,7 @@ const items = [
 type Item = typeof items[number];
 
 const isActive = (item: Item) => {
-    return item.href === location;
+    return item.href.startsWith(location);
 };
 
 const getClasses = (item: Item) => {
