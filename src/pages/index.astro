@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/root.astro';
+import Intro from '../components/intro.astro';
+import Main from '../layouts/main.astro';
+import Project from '../components/project.astro';
+import SectionHeading from '../components/section-heading.astro';
+import Button from '../components/button.astro';
+import AboutMe from '../components/about-me.astro';
+---
+
+<Layout title="Welcome to Astro.">
+  <Main>
+    <div class="flex-col flex space-y-32">
+      <div class="space-y-5">
+        <Intro description="I'm a skilled React developer with expertise in TypeScript and React Native, dedicated to crafting delightful user experiences." title="Hi, I'm Veloi." />
+        <Button class="from-primary-500 to-accent-500 bg-gradient-to-t">
+          Get in touch
+        </Button>
+      </div>
+      <div >
+        <SectionHeading title="Projects" description='Open-source projects available at github.com.' />
+        <div class="grid md:grid-cols-2 gap-4 max-w-2xl pt-10">
+          <Project id="test1" name='test1' author='veloii' />
+          <Project id="test2" name='test2' author='veloii' />
+          <Project id="test3" name='test3' author='veloii' />
+          <Project id="test4" name='test4' author='veloii' />
+          <Project id="test5" name='test5' author='veloii' />
+          <Project id="test6" name='test6' author='veloii' />
+        </div>
+      </div>
+      <AboutMe>
+        <p>
+          I'm a software engineer based in the Philippines. I'm currently working at <a href="https://www.ayalaland.com.ph/">Ayala Land</a> as a full-stack developer.
+        </p>
+        <p>
+          I'm passionate about building software that helps people. I'm also interested in open-source software, web development, and design.
+        </p>
+        <p>
+          I'm currently learning <a href="https://www.rust-lang.org/">Rust</a> and <a href="https://www.gatsbyjs.com/">Gatsby</a>.
+        </p>
+        <p>PS: Github Copilot wrote this, I'm not from the Philippines.</p>
+      </AboutMe>
+    </div>
+  </Main>
+</Layout>

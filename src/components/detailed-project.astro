@@ -1,0 +1,41 @@
+---
+import { twMerge } from 'tailwind-merge'
+interface Props {
+    author: string
+    name: string
+    id: string
+    description: string
+    buttons?: {href: string, name: string}[]
+}
+
+const {author, buttons = [], description, id, name} = Astro.props;
+---
+
+<div class="flex-grow max-w-md">
+    <div transition:animate="initial" transition:name={id} class="rounded-xl p-[2px] overflow-hidden bg-gradient-to-br from-primary-500 to-accent-500">
+        <div class="rounded-[10px] py-3 px-4 bg-black/75">
+            <p class="opacity-70 mb-1 font-semibold">
+                {author}
+            </p>
+            <span class="font-semibold text-lg">{name}</span>
+            <p class="text-base pt-2 font-semibold opacity-60">
+                {description}
+            </p>
+            {buttons && (
+                <div class="flex gap-2 mt-4">
+                    {buttons.map((button, index) => (
+                        <a class={twMerge([
+                            "inline-flex items-center px-3 py-1.5 rounded-lg text-base font-medium bg-white/10 hover:bg-white/20 text-white",
+                            index === 0 && "rounded-r",
+                            index === buttons.length - 1 && "rounded-l",
+                            index !== 0 && index !== buttons.length - 1 && "rounded",
+                            buttons.length === 1 && "rounded-lg",
+                        ].join(" "))} href={button.href} target="_blank">
+                            {button.name}
+                        </a>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
+</div>
