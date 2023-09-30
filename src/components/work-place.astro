@@ -1,0 +1,45 @@
+---
+interface Props {
+    role: string;
+    company: string;
+    location: string;
+    timePeriod: string;
+    description: string;
+    index?: number;
+    total?: number;
+}
+
+const {role, index=0, total=1, company, location, timePeriod, description} = Astro.props;
+
+const hasMultiple = total > 1;
+const isLast = hasMultiple && (index === total - 1);
+const isFirst = hasMultiple && (index === 0);
+const isMiddle = hasMultiple && !isFirst && !isLast;
+---
+
+<div class="flex gap-6 md:gap-12 relative">
+    <div class:list={["flex-grow min-w-[3px] max-w-[3px] flex justify-center items-start", !isLast && "dark:bg-neutral-800 bg-neutral-100"]}>
+        <div class:list={["h-6 w-6 dark:bg-neutral-800 bg-neutral-200 absolute rounded-full grid place-content-center", 
+            isMiddle && "top-[5rem]"
+        ]}>
+            <div class="h-3 w-3 dark:bg-neutral-700 bg-neutral-300 rounded-full" />
+        </div>
+    </div>
+    <div class:list={[
+        isMiddle && "py-20",
+    ]}>
+        <h5 class="font-mono font-normal text-base md:text-lg mt-[.1rem] uppercase md:-mt-[.1rem] mb-3 opacity-80">{timePeriod} • {location}</h5>
+        <div class="md:block hidden">
+            <h3 class="font-normal"><span class="font-bold">{company} / </span> {role}</h3>
+        </div>
+        <div class="md:hidden">
+            <h3 class="font-normal"><span class="font-bold">{company}</span></h3>
+            <h3 class="font-normal">{role}</h3>
+        </div>
+        <div class="space-y-2 max-w-2xl opacity-60 font-medium pt-6">
+            {description.split("\n").map(desc => ( 
+                <p>{desc}</p>
+            ))}
+        </div>
+    </div>
+</div>

@@ -35,7 +35,7 @@ const getClasses = (item: Item) => {
 
 <div class="flex justify-center">
     <div class="bg-neutral-200 relative dark:bg-neutral-800 p-[1px] rounded-full">
-        <div class="flex-row text-base font-medium dark:text-white/50 text-black/50 items-center px-8 flex gap-7 h-11 rounded-full bg-neutral-100 dark:bg-neutral-950/80">
+        <div class="flex-row text-base font-medium dark:text-white/50 text-black/50 items-center px-8 flex gap-7 h-11 rounded-full bg-white/80 dark:bg-neutral-950/80">
             {items.map(item => (
                 <div class="relative h-full flex flex-col justify-center">
                     <a
@@ -51,7 +51,7 @@ const getClasses = (item: Item) => {
                         transition:animate="initial"
 
                          class="h-[45px] left-[-50px] bottom-[-1px] w-[calc(100%+100px)] absolute pointer-events-none z-10 overflow-hidden">
-                            <div class="bg-gradient-to-l from-primary-600 to-accent-600 blur-lg -bottom-5 absolute w-6 left-1/2 -translate-x-1/2 h-7"></div>
+                            <div class="bg-gradient-to-l dark:from-primary-600 dark:to-accent-600 from-primary-400 to-accent-400 blur-lg -bottom-5 absolute w-6 left-1/2 -translate-x-1/2 h-7"></div>
                         </div>
                     }
                 </div>

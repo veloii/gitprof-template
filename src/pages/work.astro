@@ -1,11 +1,29 @@
 ---
 import Layout from '../layouts/root.astro'
 import Main from '../layouts/main.astro'
+import Intro from '../components/intro.astro';
+import WorkPlace from '../components/work-place.astro';
+
+const defaultProps = {
+  role: "Production Designer",
+  company: "Sentry",
+  location: "London, England",
+  timePeriod: "2018 to 2020",
+  description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id justo vel nibh scelerisque ullamcorper a et ipsum. Integer mattis purus erat, ac sollicitudin ex sollicitudin non. Nunc auctor turpis a leo consequat maximus. Donec dapibus elementum elit id lobortis.\nProin ac vestibulum massa, eget semper nibh. Ut placerat erat in est ullamcorper luctus. Sed eu dui euismod, dapibus dui id, fermentum felis. Curabitur id metus lobortis, tincidunt erat quis, sodales nunc. Nam turpis mauris, lacinia faucibus neque sed.`,
+  total: 3
+}
 ---
 
 <Layout title="Welcome to Astro.">
   <Main>
-        <div class="flex-col flex gap-10">
-        </div>
-    </Main>
+    <div class="flex-col flex gap-10">
+      <Intro title="Work" description="My experience in the industry." />
+
+      <div class="pt-4">
+        <WorkPlace {...defaultProps} index={0} />  
+        <WorkPlace {...defaultProps} index={1} />  
+        <WorkPlace {...defaultProps} index={2} />  
+      </div>
+    </div>
+  </Main>
 </Layout>

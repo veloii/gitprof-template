@@ -8,6 +8,6 @@ interface Props extends HTMLAttributes<"button"> {
 const {class:className, ...props} = Astro.props;
 ---
 
-<button class={twMerge(["bg-primary-700 hover:bg-primary-600 active:bg-primary-500 font-semibold rounded-lg inline-flex px-6 transition ease-out py-2", className].join(" "))} {...props}>
+<button class={twMerge(["bg-primary-700 hover:bg-primary-600 active:bg-primary-500 font-semibold rounded-lg inline-flex px-6 transition ease-out py-2 text-white", className].join(" "))} {...props}>
     <slot />
 </button>
