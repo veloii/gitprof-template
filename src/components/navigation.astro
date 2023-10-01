@@ -67,11 +67,17 @@ const getClasses = (item: Item) => {
     }
 
     .header-wrapper-sticky {
-        @apply bg-neutral-200/50 rounded-[50px] backdrop-blur z-50 relative dark:bg-neutral-700/40 !important;
+        @apply bg-neutral-200/50 backdrop-blur rounded-[50px] z-50 relative dark:bg-neutral-700/40 !important;
     }
 
     .header-root-sticky {
-        @apply w-[calc(100%-20%)] pt-5 left-[10%] rounded-full !important;
+        @apply pt-5 rounded-full !important;
+    }
+
+    .header-root-sticky-delay {
+        --screen-width: min(100%,1152px);
+        --width-offset: 2rem;
+        @apply w-[calc(var(--screen-width)-var(--width-offset))] ml-[calc((var(--screen-width)-var(--width-offset))/-2)] left-1/2 right-auto !important;
     }
 </style>
 
@@ -81,15 +87,31 @@ const getClasses = (item: Item) => {
         const elementWrapper = document.getElementById("header-wrapper")!;
         const elementRoot = document.getElementById("header-root")!;
 
+        let headerRootStickyDelayTimeout: number | undefined = undefined;
+
         window.addEventListener("scroll", () => {
             if (window.scrollY > 0) {
-                element.classList.add("header-sticky");
-                elementWrapper.classList.add("header-wrapper-sticky");
-                elementRoot.classList.add("header-root-sticky");
+
+                elementRoot.classList.add("header-root-sticky-delay");
+                if (headerRootStickyDelayTimeout) {
+                    clearTimeout(headerRootStickyDelayTimeout);
+                }
+
+                headerRootStickyDelayTimeout = setTimeout(() => {
+                    element.classList.add("header-sticky");
+                    elementWrapper.classList.add("header-wrapper-sticky");
+                    elementRoot.classList.add("header-root-sticky");
+                }, 50);
             } else {
+                elementRoot.style.left = "0px";
                 elementWrapper.classList.remove("header-wrapper-sticky");
                 element.classList.remove("header-sticky");
                 elementRoot.classList.remove("header-root-sticky");
+                elementRoot.classList.remove("header-root-sticky-delay");
+
+                if (headerRootStickyDelayTimeout) {
+                    clearTimeout(headerRootStickyDelayTimeout);
+                }
             }
         });
     });
