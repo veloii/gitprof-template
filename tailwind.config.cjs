@@ -1,5 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors")
+const config = require("./src/assets/config.json")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,10 +13,12 @@ module.exports = {
 				mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
 			},
 			colors: {
-				primary: colors.purple,
-				accent: colors.indigo,
+				primary: colors[config.theme.primary],
+				accent: colors[config.theme.accent],
 			}
 		},
 	},
-	plugins: [],
+	plugins: [
+		require("@tailwindcss/typography")
+	],
 }

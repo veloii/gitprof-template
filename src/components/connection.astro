@@ -1,0 +1,41 @@
+---
+import Icon from 'astro-icon';
+import Button from './button.astro';
+import { getBgColor } from "../lib/config-color"
+
+interface GenericConnection {
+    href: string,
+    color?: "accent" | "primary" | "neutral" | "invert-neutral" | "gradient" | string,
+}
+
+interface TextConnection extends GenericConnection {
+    name: string,
+}
+
+interface IconConnection extends GenericConnection {
+    icon: {
+        pack: string,
+        name: string,
+    },
+}
+
+interface Props {
+    connection: TextConnection | IconConnection;
+}
+
+const { connection } = Astro.props;
+
+const type = "name" in connection ? 'button' : 'icon';
+---
+
+{type === "button" ? (
+    <a href={connection.href} target="_blank">
+        <Button class={`hover:opacity-80 ${getBgColor(connection.color)}`}>
+            {(connection as TextConnection).name} 
+        </Button>
+    </a>
+) : (
+    <a class="inline-flex items-center rounded-lg text-base font-medium dark:text-white text-black transition-opacity opacity-75 hover:opacity-50" href={connection.href} target="_blank">
+        <Icon class="h-6" pack={(connection as IconConnection).icon.pack} name={(connection as IconConnection).icon.name} />
+    </a>
+)}

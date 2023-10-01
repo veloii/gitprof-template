@@ -3,6 +3,8 @@ import Layout from '../layouts/root.astro';
 import Main from '../layouts/main.astro';
 import Intro from '../components/intro.astro';
 import DetailedProject from '../components/detailed-project.astro';
+
+import config from "config";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -10,49 +12,12 @@ import DetailedProject from '../components/detailed-project.astro';
     <div class="flex-col flex gap-10">
       <Intro title="Projects" description='Open-source projects available at github.com.' />
 
-      <div class="flex gap-5 flex-wrap">
-        <DetailedProject buttons={[
-          {
-            name: 'Github',
-            href: '',
-          },
-          {
-            name: 'NPM',
-            href: '',
-          },
-          {
-            name: 'Demo',
-            href: '',
-          },
-        ]} id="test1" name='test1' author='veloii' description='Praesent in lobortis dolor. Integer et metus at mauris hendrerit hendrerit. Sed sit amet porttitor arcu.' />
-        <DetailedProject buttons={[
-          {
-            name: 'Github',
-            href: '',
-          },
-          {
-            name: 'NPM',
-            href: '',
-          },
-          {
-            name: 'Demo',
-            href: '',
-          },
-        ]} id="test2" name='test2' author='veloii' description='Praesent in lobortis dolor. Integer et metus at mauris hendrerit hendrerit. Sed sit amet porttitor arcu.' />
-        <DetailedProject buttons={[
-          {
-            name: 'Github',
-            href: '',
-          },
-          {
-            name: 'NPM',
-            href: '',
-          },
-          {
-            name: 'Demo',
-            href: '',
-          },
-        ]} id="test3" name='test3' author='veloii' description='Praesent in lobortis dolor. Integer et metus at mauris hendrerit hendrerit. Sed sit amet porttitor arcu.' />
+      <div class="columns-xs gap-4">
+        {config.repos.map(repo => (
+          <div class="w-full pb-4">
+            <DetailedProject id={repo.name} {...repo} />
+          </div>
+        ))}
       </div>
     </div>
   </Main>
