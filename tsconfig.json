@@ -2,9 +2,10 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["bun-types"],
     "paths": {
       "~/*": ["src/*"],
-      "config": ["src/assets/config.json"]
+      "config": ["config.json"]
     }
   }
 }
