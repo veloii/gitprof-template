@@ -7,7 +7,8 @@
     "start": "bun x --bun -- astro dev",
     "build": "bun x --bun -- astro build",
     "preview": "bun x --bun -- astro preview",
-    "astro": "bun x --bun -- astro"
+    "astro": "bun x --bun -- astro",
+    "postinstall": "cd node_modules/sharp && bun install && cd ../.."
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",
