@@ -21,6 +21,9 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.0.24"
   },
+  "trustedDependencies": [
+    "sharp"
+  ],
   "devDependencies": {
     "@types/showdown": "^2.0.2",
     "bun-types": "^1.0.4-canary.20231003T140149",
