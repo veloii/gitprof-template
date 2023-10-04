@@ -14,11 +14,11 @@ const items = [
     },
     {
         name: 'Work',
-        href: '/work',
+        href: '/work/',
     },
     {
         name: 'Projects',
-        href: '/projects',
+        href: '/projects/',
     },
 ];
 
@@ -87,7 +87,7 @@ const getClasses = (item: Item) => {
         const elementWrapper = document.getElementById("header-wrapper")!;
         const elementRoot = document.getElementById("header-root")!;
 
-        let headerRootStickyDelayTimeout: number | undefined = undefined;
+        let headerRootStickyDelayTimeout: number | Timer | undefined = undefined;
 
         window.addEventListener("scroll", () => {
             if (window.scrollY > 0) {
